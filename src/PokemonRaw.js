@@ -8,6 +8,7 @@ const PokemonRaw = ({ pokemon }) => {
     </tr>
   );
 };
+
 PokemonRaw.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.shape({
