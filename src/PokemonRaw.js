@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 
-const PokemonRaw = ({ pokemon }) => {
+const PokemonRaw = ({ pokemon, onSelect }) => {
   return (
     <tr>
       <td>{pokemon.name.english}</td>
       <td>{pokemon.type.join(", ")}</td>
+      <td>
+        <button onClick={() => onSelect(pokemon)}>Select!</button>
+      </td>
     </tr>
   );
 };
@@ -16,6 +19,7 @@ PokemonRaw.propTypes = {
     }),
     type: PropTypes.arrayOf(PropTypes.string),
   }),
+  onSelect: PropTypes.func,
 };
 
 export default PokemonRaw;
