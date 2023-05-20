@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import PokemonRaw from "./PokemonRaw";
 
-import pokemon from "./pokemon.json";
 import PokemonInfo from "./PokemonInfo";
 
 function App() {
   const [filter, setFilter] = useState("");
   const [selectedItem, setselectedItem] = useState(null);
+  const [pokemon, setPokemon] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/react-project/pokemon.json")
+      .then((resp) => resp.json())
+      .then((data) => setPokemon(data));
+  }, []);
+
+  if (!pokemon) {
+    return <div>Loading data</div>;
+  }
 
   return (
     <div
