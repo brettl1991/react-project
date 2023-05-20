@@ -3,6 +3,7 @@ import "./App.css";
 import PokemonRaw from "./PokemonRaw";
 
 import pokemon from "./pokemon.json";
+import PokemonInfo from "./PokemonInfo";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -39,27 +40,20 @@ function App() {
             </thead>
             <tbody>
               {pokemon
-                .filter((pokemon) =>
-                  pokemon.name.english
-                    .toLowerCase()
-                    .includes(filter.toLowerCase())
+                .filter(({ name: { english } }) =>
+                  english.toLowerCase().includes(filter.toLowerCase())
                 )
                 .slice(0, 20)
                 .map((pokemon) => (
                   <PokemonRaw
                     pokemon={pokemon}
-                    key={pokemon.id}
-                    onSelect={(pokemon) => setselectedItem(pokemon)}
+                    onClick={(pokemon) => setselectedItem(pokemon)}
                   />
                 ))}
             </tbody>
           </table>
         </div>
-        {selectedItem && (
-          <div>
-            <h1>{selectedItem.name.english}</h1>
-          </div>
-        )}
+        {selectedItem && <PokemonInfo {...selectedItem} />}
       </div>
     </div>
   );

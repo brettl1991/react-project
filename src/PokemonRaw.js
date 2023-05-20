@@ -1,25 +1,20 @@
 import PropTypes from "prop-types";
+import { PokemonType } from "./PokemonInfo";
 
-const PokemonRaw = ({ pokemon, onSelect }) => {
+const PokemonRaw = ({ pokemon, onClick }) => {
   return (
     <tr>
       <td>{pokemon.name.english}</td>
       <td>{pokemon.type.join(", ")}</td>
       <td>
-        <button onClick={() => onSelect(pokemon)}>Select!</button>
+        <button onClick={() => onClick(pokemon)}>Select!</button>
       </td>
     </tr>
   );
 };
 
 PokemonRaw.propTypes = {
-  pokemon: PropTypes.shape({
-    name: PropTypes.shape({
-      english: PropTypes.string,
-    }),
-    type: PropTypes.arrayOf(PropTypes.string),
-  }),
-  onSelect: PropTypes.func,
+  pokemon: PropTypes.arrayOf(PokemonType),
 };
 
 export default PokemonRaw;
