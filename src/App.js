@@ -3,6 +3,7 @@ import "./App.css";
 import PokemonRaw from "./PokemonRaw";
 
 import PokemonInfo from "./PokemonInfo";
+import { styled } from "styled-components";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -20,23 +21,11 @@ function App() {
   }
 
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: 800,
-        paddingTop: "1rem",
-      }}
-    >
-      <h1 className="title">Pokemon Search</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "70% 30%",
-          gridColumnGap: "1rem",
-        }}
-      >
+    <Container>
+      <STitle>Pokemon Search</STitle>
+      <TwoColumnLayout>
         <div>
-          <input
+          <Input
             value={filter}
             onChange={(evt) => setFilter(evt.target.value)}
           />
@@ -64,9 +53,31 @@ function App() {
           </table>
         </div>
         {selectedItem && <PokemonInfo {...selectedItem} />}
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </Container>
   );
 }
+
+const STitle = styled.h1`
+  text-align: center;
+`;
+
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1rem;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 800px;
+  padding-top: 1rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: 0.2rem;
+`;
 
 export default App;
