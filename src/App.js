@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import PokemonRaw from "./PokemonRaw";
+import PokemonRaw from "./components/PokemonRaw";
 
-import PokemonInfo from "./PokemonInfo";
+import PokemonInfo from "./components/PokemonInfo";
 import { styled } from "styled-components";
+import PokemonFilter from "./components/PokemonFilter";
+import { PokemonTable } from "./components/PokemonTable";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -25,32 +27,12 @@ function App() {
       <STitle>Pokemon Search</STitle>
       <TwoColumnLayout>
         <div>
-          <Input
-            value={filter}
-            onChange={(evt) => setFilter(evt.target.value)}
+          <PokemonFilter filter={filter} setFilter={setFilter} />
+          <PokemonTable
+            filter={filter}
+            pokemon={pokemon}
+            setselectedItem={selectedItem}
           />
-
-          <table width="100%">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pokemon
-                .filter(({ name: { english } }) =>
-                  english.toLowerCase().includes(filter.toLowerCase())
-                )
-                .slice(0, 20)
-                .map((pokemon) => (
-                  <PokemonRaw
-                    pokemon={pokemon}
-                    onClick={(pokemon) => setselectedItem(pokemon)}
-                  />
-                ))}
-            </tbody>
-          </table>
         </div>
         {selectedItem && <PokemonInfo {...selectedItem} />}
       </TwoColumnLayout>
@@ -72,12 +54,6 @@ const Container = styled.div`
   margin: auto;
   width: 800px;
   padding-top: 1rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  font-size: x-large;
-  padding: 0.2rem;
 `;
 
 export default App;

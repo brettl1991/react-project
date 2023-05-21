@@ -1,24 +1,6 @@
 import PropTypes from "prop-types";
 
-const PokemonInfo = ({ name: { english }, base }) => {
-  return (
-    <div>
-      <h2>{english}</h2>
-      <table>
-        <tbody>
-          {Object.keys(base).map((key) => (
-            <tr key={key}>
-              <td>{key}</td>
-              <td>{base[key]}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-export const PokemonType = PropTypes.shape({
+const PokemonType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.shape({
     english: PropTypes.string.isRequired,
@@ -37,6 +19,4 @@ export const PokemonType = PropTypes.shape({
   }),
 });
 
-PokemonInfo.propTypes = PokemonType;
-
-export default PokemonInfo;
+export default PokemonType;
