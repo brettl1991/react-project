@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "styled-components";
+import PokemonContext from "../PokemonContext";
 
-const PokemonFilter = ({ filter, setFilter }) => {
+const PokemonFilter = () => {
+  const { filter, setFilter } = useContext(PokemonContext);
   return (
     <Input value={filter} onChange={(evt) => setFilter(evt.target.value)} />
   );

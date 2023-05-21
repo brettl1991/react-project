@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import PokemonRaw from "./PokemonRaw";
+import PokemonContext from "../PokemonContext";
 
-export const PokemonTable = ({ pokemon, filter, setselectedItem }) => {
+export const PokemonTable = () => {
+  const { pokemon, filter, setselectedItem } = useContext(PokemonContext);
   return (
     <table width="100%">
       <thead>

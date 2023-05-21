@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import PokemonRaw from "./components/PokemonRaw";
 
 import PokemonInfo from "./components/PokemonInfo";
 import { styled } from "styled-components";
 import PokemonFilter from "./components/PokemonFilter";
 import { PokemonTable } from "./components/PokemonTable";
+import PokemonContext from "./PokemonContext";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -23,20 +23,27 @@ function App() {
   }
 
   return (
-    <Container>
-      <STitle>Pokemon Search</STitle>
-      <TwoColumnLayout>
-        <div>
-          <PokemonFilter filter={filter} setFilter={setFilter} />
-          <PokemonTable
-            filter={filter}
-            pokemon={pokemon}
-            setselectedItem={selectedItem}
-          />
-        </div>
-        {selectedItem && <PokemonInfo {...selectedItem} />}
-      </TwoColumnLayout>
-    </Container>
+    <PokemonContext.Provider
+      value={{
+        filter,
+        selectedItem,
+        pokemon,
+        setFilter,
+        setselectedItem,
+        setPokemon,
+      }}
+    >
+      <Container>
+        <STitle>Pokemon Search</STitle>
+        <TwoColumnLayout>
+          <div>
+            <PokemonFilter />
+            <PokemonTable />
+          </div>
+          <PokemonInfo />
+        </TwoColumnLayout>
+      </Container>
+    </PokemonContext.Provider>
   );
 }
 
